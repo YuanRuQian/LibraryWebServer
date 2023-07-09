@@ -1,0 +1,41 @@
+# .NET
+*/bin/
+*/obj/
+*/.vs/
+
+# Visual Studio
+.vscode/
+*.user
+*.suo
+*.cache
+*.csproj.user
+*.ide
+
+# Build tooling
+.nuget/
+paket-files/
+paket-files-cache/
+paket.lock
+project.lock.json
+build/
+packages/
+*.xproj
+project.lock.json
+*.msi
+*.nuget.props
+*.nuget.targets
+*.swp
+*.suo
+*_ReSharper*
+*.resharper
+*.resharper.user
+_ReSharper*/
+*.dotSettings.user
+*.sln.DotSettings.user
+*.sln.DotSettings
+*.dotCover
+
+# Others
+desktop.ini
+Thumbs.db
+
