@@ -1,0 +1,73 @@
+# Ignore build output directories
+**/bin/
+**/obj/
+
+# Ignore NuGet package directories
+/packages/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userprefs
+*.vs
+
+# Ignore build and log files
+*.apk
+*.apks
+*.ipa
+*.msi
+*.pdb
+*.vsix
+*.zip
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.swp
+*.swo
+*.nupkg
+*.log
+*.tmp
+
+# Ignore macOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Ignore Visual Studio files
+.vscode/
+*.sln.DotSettings
+*.vssscc
+*.vspscc
+*.cproj.user
+*.vbproj.user
+*.vcxproj.user
+*.dcproj.user
+*.rptproj.user
+*.shproj.user
+*.sqlproj.user
+*.dtproj.user
+
+# Ignore JetBrains Rider files
+.idea/
+*.iml
+*.ipr
+*.iws
+*.resharper
+
+# Ignore build cache and analysis folders
+/build/
+/TestResults/
+
+# Ignore SQLite database file
+*.sqlite
+
+# Ignore miscellaneous files
+*.bak
+*.cache
+*.msbuild
+*.publishsettings
+*.sln.docstates
+*.testsettings
+*.resharper.user
+
+.DS_Store
