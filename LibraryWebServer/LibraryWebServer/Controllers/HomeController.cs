@@ -145,11 +145,20 @@ namespace LibraryWebServer.Controllers
         [HttpPost]
         public ActionResult CheckOutBook( int serial )
         {
-            // You may have to cast serial to a (uint)
+            uint serialNumber = (uint)serial;
 
+            var checkedOut = new CheckedOut
+            {
+                CardNum = (uint)card,
+                Serial = serialNumber
+            };
 
-            return Json( new { success = true } );
+            db.CheckedOut.Add(checkedOut);
+            db.SaveChanges();
+
+            return Json(new { success = true });
         }
+
 
         /// <summary>
         /// Returns a book currently checked out by the logged in user (global variable "card").
