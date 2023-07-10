@@ -12,12 +12,12 @@ namespace LibraryWebServer
       // Add services to the container.
       builder.Services.AddControllersWithViews();
 
-      //builder.Configuration.AddUserSecrets<Program>();
+      builder.Configuration.AddUserSecrets<Program>();
 
-      //var connectionString = builder.Configuration["MyConn:Library"];
+      var connectionString = builder.Configuration["MyConn:Library"];
 
-      //builder.Services.AddDbContext<LibraryContext>(options =>
-      //options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+      builder.Services.AddDbContext<LibraryContext>(options =>
+      options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
       var app = builder.Build();
 

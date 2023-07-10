@@ -16,11 +16,11 @@ namespace LibraryWebServer.Controllers
         private static string user = "";
         private static int card = -1;
 
-        //private readonly LibraryContext db;
-        //public HomeController(LibraryContext _db)
-        //{
-        //    db = _db;
-        //}
+        private readonly LibraryContext db;
+        public HomeController(LibraryContext _db)
+        {
+            db = _db;
+        }
 
         /// <summary>
         /// Given a Patron name and CardNum, verify that they exist and match in the database.
@@ -34,13 +34,24 @@ namespace LibraryWebServer.Controllers
         [HttpPost]
         public IActionResult CheckLogin( string name, int cardnum )
         {
-            // TODO: Fill in. Determine if login is successful or not.
             bool loginSuccessful = false;
+
+            var patron = from p in db.Patrons
+                          where p.Name == name && p.CardNum == cardnum
+                          select p;
+
+            bool validPatronsExist = patron.Any();
+
+            if (validPatronsExist)
+            {
+                loginSuccessful = true;
+            }
 
             if ( !loginSuccessful )
             {
                 return Json( new { success = false } );
             }
+
             else
             {
                 user = name;
@@ -78,7 +89,7 @@ namespace LibraryWebServer.Controllers
 
             // TODO: Implement
 
-            return Json( null );
+            return Json(null);
 
         }
 
