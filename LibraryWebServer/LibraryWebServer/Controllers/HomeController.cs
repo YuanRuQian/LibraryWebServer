@@ -170,9 +170,21 @@ namespace LibraryWebServer.Controllers
         [HttpPost]
         public ActionResult ReturnBook( int serial )
         {
-            // You may have to cast serial to a (uint)
+            uint serialNumber = (uint)serial;
 
-            return Json( new { success = true } );
+            var checkedOut = db.CheckedOut.FirstOrDefault(c => c.CardNum == card && c.Serial == serialNumber);
+
+            if (checkedOut != null)
+            {
+                db.CheckedOut.Remove(checkedOut);
+                db.SaveChanges();
+
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "The book is not checked out by the user." });
+            }
         }
 
 
