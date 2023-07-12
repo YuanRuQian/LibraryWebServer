@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo( "TestProject1" )]
+[assembly: InternalsVisibleTo("TestProject1")]
 namespace LibraryWebServer.Controllers
 {
     public class HomeController : Controller
@@ -42,13 +42,13 @@ namespace LibraryWebServer.Controllers
         /// true if the login is accepted, false otherwise.
         /// </returns>
         [HttpPost]
-        public IActionResult CheckLogin( string name, int cardnum )
+        public IActionResult CheckLogin(string name, int cardnum)
         {
             bool loginSuccessful = false;
 
             var patron = from p in db.Patrons
-                          where p.Name == name && p.CardNum == cardnum
-                          select p;
+                         where p.Name == name && p.CardNum == cardnum
+                         select p;
 
             bool validPatronsExist = patron.Any();
 
@@ -57,16 +57,16 @@ namespace LibraryWebServer.Controllers
                 loginSuccessful = true;
             }
 
-            if ( !loginSuccessful )
+            if (!loginSuccessful)
             {
-                return Json( new { success = false } );
+                return Json(new { success = false });
             }
 
             else
             {
                 user = name;
                 card = cardnum;
-                return Json( new { success = true } );
+                return Json(new { success = true });
             }
         }
 
@@ -80,7 +80,7 @@ namespace LibraryWebServer.Controllers
         {
             user = "";
             card = -1;
-            return Json( new { success = true } );
+            return Json(new { success = true });
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace LibraryWebServer.Controllers
                     title = t.Title,
                     author = t.Author,
                     serial = j1 != null ? (uint?)j1.Serial : null,
-                    name = j3.Name??""
+                    name = j3.Name ?? ""
                 };
 
             return Json(query.ToArray());
@@ -153,7 +153,7 @@ namespace LibraryWebServer.Controllers
         /// <param name="serial">The serial number of the book to check out</param>
         /// <returns>success</returns>
         [HttpPost]
-        public ActionResult CheckOutBook( int serial )
+        public ActionResult CheckOutBook(int serial)
         {
             uint serialNumber = (uint)serial;
 
@@ -178,7 +178,7 @@ namespace LibraryWebServer.Controllers
         /// <param name="serial">The serial number of the book to return</param>
         /// <returns>Success</returns>
         [HttpPost]
-        public ActionResult ReturnBook( int serial )
+        public ActionResult ReturnBook(int serial)
         {
             uint serialNumber = (uint)serial;
 
@@ -205,8 +205,8 @@ namespace LibraryWebServer.Controllers
 
         public IActionResult Index()
         {
-            if ( user == "" && card == -1 )
-                return View( "Login" );
+            if (user == "" && card == -1)
+                return View("Login");
 
             return View();
         }
@@ -232,8 +232,8 @@ namespace LibraryWebServer.Controllers
         /// <returns></returns>
         public IActionResult MyBooks()
         {
-            if ( user == "" && card == -1 )
-                return View( "Login" );
+            if (user == "" && card == -1)
+                return View("Login");
 
             return View();
         }
@@ -245,10 +245,10 @@ namespace LibraryWebServer.Controllers
             return View();
         }
 
-        [ResponseCache( Duration = 0, Location = ResponseCacheLocation.None, NoStore = true )]
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View( new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier } );
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
