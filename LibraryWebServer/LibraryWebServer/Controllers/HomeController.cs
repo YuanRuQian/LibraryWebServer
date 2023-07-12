@@ -17,6 +17,16 @@ namespace LibraryWebServer.Controllers
         private static int card = -1;
 
         private readonly LibraryContext db;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
         public HomeController(LibraryContext _db)
         {
             db = _db;
@@ -87,7 +97,7 @@ namespace LibraryWebServer.Controllers
         public ActionResult AllTitles()
         {
             var query =
-                from t in db.Titles
+                from t in db.Titles.DefaultIfEmpty()
                 join i in db.Inventory on t.Isbn equals i.Isbn into join1
                 from j1 in join1.DefaultIfEmpty()
                 join c in db.CheckedOut on j1.Serial equals c.Serial into join2
@@ -103,7 +113,7 @@ namespace LibraryWebServer.Controllers
                     name = j3.Name??""
                 };
 
-            return Json(query.ToList());
+            return Json(query.ToArray());
         }
 
         /// <summary>
@@ -131,7 +141,7 @@ namespace LibraryWebServer.Controllers
                     serial = j2.Serial
                 };
 
-            return Json(query.ToList());
+            return Json(query.ToArray());
         }
 
         /// <summary>
