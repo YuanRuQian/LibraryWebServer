@@ -56,32 +56,16 @@ namespace TestProject1
             dynamic x = allTitlesResult.Value;
 
             Assert.Equal(1, x.Length);
-            //output.WriteLine("x:");
-            //output.WriteLine(JsonConvert.SerializeObject(x, Formatting.Indented));
-            //output.WriteLine("x[0]:");
-            //output.WriteLine(JsonConvert.SerializeObject(x[0], Formatting.Indented));
-            //output.WriteLine("x[0] properties:");
-            //// Print the properties of x[0] to inspect its structure
-            //var properties = x[0].GetType().GetProperties();
-            //foreach (var property in properties)
-            //{
-            //    output.WriteLine($"Property Name: {property.Name}");
-            //}
 
-            //Type xDynamicType = x.GetType();
-            //output.WriteLine($"x dynamic type: {xDynamicType}");
+            var jsonArray = JArray.Parse(JsonConvert.SerializeObject(x));
+            var firstItem = jsonArray[0];
+            var author = (string)firstItem["author"];
+            var isbn = (string)firstItem["isbn"];
+            var title = (string)firstItem["title"];
 
-            //Type xZeroDynamicType = x[0].GetType();
-            //output.WriteLine($"x[0] dynamic type: {xZeroDynamicType}");
-
-            //var jsonArray = JArray.Parse(JsonConvert.SerializeObject(x));
-            //var firstItem = jsonArray[0];
-            //var isbn = (string)firstItem["isbn"];
-            Console.WriteLine(x[0].title);
-          //  Assert.Equal("123-5678901234", isbn);
-
-            // Assert.Equal("123-5678901234", x[0].isbn);
-
+            Assert.Equal("123-5678901234", isbn);
+            Assert.Equal("Fake author", author);
+            Assert.Equal("Fake title", title);
         }
 
         private static ServiceProvider NewServiceProvider()
