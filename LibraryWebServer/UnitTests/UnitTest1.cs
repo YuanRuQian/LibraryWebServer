@@ -1,4 +1,4 @@
-﻿using LibraryWebServer.Controllers;
+using LibraryWebServer.Controllers;
 using LibraryWebServer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -68,19 +68,20 @@ namespace TestProject1
             //    output.WriteLine($"Property Name: {property.Name}");
             //}
 
-            //Type xDynamicType = x.GetType();
-            //output.WriteLine($"x dynamic type: {xDynamicType}");
+            Type xDynamicType = x.GetType();
+            output.WriteLine($"x dynamic type: {xDynamicType}");
 
-            //Type xZeroDynamicType = x[0].GetType();
-            //output.WriteLine($"x[0] dynamic type: {xZeroDynamicType}");
+            Type xZeroDynamicType = x[0].GetType();
+            output.WriteLine($"x[0] dynamic type: {xZeroDynamicType}");
 
             //var jsonArray = JArray.Parse(JsonConvert.SerializeObject(x));
             //var firstItem = jsonArray[0];
             //var isbn = (string)firstItem["isbn"];
             Console.WriteLine(x[0].title);
-          //  Assert.Equal("123-5678901234", isbn);
+           // Assert.Equal("123-5678901234", isbn);
 
-            // Assert.Equal("123-5678901234", x[0].isbn);
+             Assert.Equal("123-5678901234", x[0].isbn);
+            Assert.Equal("Fake title", x[0].title);
 
         }
 
