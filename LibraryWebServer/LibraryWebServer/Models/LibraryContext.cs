@@ -26,7 +26,12 @@ public partial class LibraryContext : DbContext
     public virtual DbSet<Titles> Titles { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseMySql("name=MyConn:Library", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.11.3-mariadb"));
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseMySql("name=MyConn:Library", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.11.3-mariadb"));
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
