@@ -9,7 +9,7 @@ public partial class Patrons
 
     public string Name { get; set; } = null!;
 
-    public virtual ICollection<CheckedOut> CheckedOut { get; set; } = new List<CheckedOut>();
+    public virtual ICollection<CheckedOut> CheckedOut { get; } = new List<CheckedOut>();
 
-    public virtual ICollection<Phones> Phones { get; set; } = new List<Phones>();
+    public virtual ICollection<Phones> Phones { get; } = new List<Phones>();
 }

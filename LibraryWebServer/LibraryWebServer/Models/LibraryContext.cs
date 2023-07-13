@@ -29,7 +29,7 @@ public partial class LibraryContext : DbContext
     {
         if (!optionsBuilder.IsConfigured)
         {
-            optionsBuilder.UseMySql("name=MyConn:Library", Microsoft.EntityFrameworkCore.ServerVersion.Parse("10.11.3-mariadb"));
+            optionsBuilder.UseMySql("name=MyConn:Library", ServerVersion.Parse("10.11.3-mariadb"));
         }
     }
 

@@ -11,5 +11,5 @@ public partial class Titles
 
     public string Author { get; set; } = null!;
 
-    public virtual ICollection<Inventory> Inventory { get; set; } = new List<Inventory>();
+    public virtual ICollection<Inventory> Inventory { get; } = new List<Inventory>();
 }
