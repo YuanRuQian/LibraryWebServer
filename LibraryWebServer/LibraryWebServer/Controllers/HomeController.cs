@@ -127,19 +127,17 @@ namespace LibraryWebServer.Controllers
         [HttpPost]
         public ActionResult ListMyBooks()
         {
-            var query =
-                from t in db.Titles
-                join i in db.Inventory on t.Isbn equals i.Isbn into join1
-                from j1 in join1.DefaultIfEmpty()
-                join c in db.CheckedOut on j1.Serial equals c.Serial into join2
-                from j2 in join2.DefaultIfEmpty()
-                where j2.CardNum == card
-                select new
-                {
-                    title = t.Title,
-                    author = t.Author,
-                    serial = j2.Serial
-                };
+            var query = from p in db.Patrons
+                        where p.CardNum == card
+                        join c in db.CheckedOut on p.CardNum equals c.CardNum
+                        join i in db.Inventory on c.Serial equals i.Serial
+                        join t in db.Titles on i.Isbn equals t.Isbn
+                        select new
+                        {
+                            title = t.Title,
+                            author = t.Author,
+                            serial = i.Serial
+                        };
 
             return Json(query.ToArray());
         }
@@ -164,7 +162,14 @@ namespace LibraryWebServer.Controllers
             };
 
             db.CheckedOut.Add(checkedOut);
-            db.SaveChanges();
+            try
+            { 
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
 
             return Json(new { success = true });
         }
