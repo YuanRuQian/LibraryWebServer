@@ -162,7 +162,14 @@ namespace LibraryWebServer.Controllers
             };
 
             db.CheckedOut.Add(checkedOut);
-            db.SaveChanges();
+            try
+            { 
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+            }
 
             return Json(new { success = true });
         }
